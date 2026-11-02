@@ -1,4 +1,4 @@
-"""python train.py --algo {dt,bc,pbc} --dataset hopper-medium --seed 0 [--steps N]"""
+"""python train.py --algo {dt,bc,pbc} --dataset hopper-medium --seed 0 [--steps N] [--lr X] [--tag _name]"""
 import argparse, os, time, json, csv, math
 import numpy as np, torch, torch.nn.functional as F
 import dtlib
@@ -11,6 +11,8 @@ p.add_argument("--seed", type=int, default=0)
 p.add_argument("--steps", type=int, default=None)
 p.add_argument("--batch", type=int, default=None)
 p.add_argument("--device", default=None)
+p.add_argument("--lr", type=float, default=None)   # default: 3e-4 (dt), 1e-3 (bc/pbc)
+p.add_argument("--tag", default="")                 # suffix for ckpt/log names, keeps side runs apart from the main grid
 a = p.parse_args()
 torch.set_num_threads(2)
 dev = torch.device(a.device or ("cuda" if a.algo == "dt" and torch.cuda.is_available() else "cpu"))
@@ -25,13 +27,13 @@ bt = Batcher(trajs, 20, dev)
 print(f"{a.dataset} {a.algo}: {len(trajs)} trajectories, {sum(len(t['rew']) for t in trajs)} steps", flush=True)
 if a.algo == "dt":
     net = DecisionTransformer(bt.od, bt.ad).to(dev)
-    lr, wd, warm = 3e-4, 1e-4, 1000
+    lr, wd, warm = a.lr or 3e-4, 1e-4, 1000
 else:
     net = make_mlp(bt.od, bt.ad).to(dev)
-    lr, wd, warm = 1e-3, 0.0, 200
+    lr, wd, warm = a.lr or 1e-3, 0.0, 200
 opt = torch.optim.AdamW(net.parameters(), lr=lr, weight_decay=wd)
 sched = torch.optim.lr_scheduler.LambdaLR(opt, lambda i: min(1, (i + 1) / warm) * (0.5 * (1 + math.cos(math.pi * min(i, steps) / steps)) * 0.99 + 0.01))
-name = f"{a.dataset}_{a.algo}_s{a.seed}"
+name = f"{a.dataset}_{a.algo}{a.tag}_s{a.seed}"
 os.makedirs("logs", exist_ok=True); os.makedirs("ckpt", exist_ok=True)
 f = open(f"logs/{name}.csv", "w", newline=""); w = csv.writer(f); w.writerow(["step", "loss", "lr", "elapsed_s"])
 t0, acc = time.time(), []
@@ -52,6 +54,6 @@ for i in range(1, steps + 1):
         if i % 5000 == 0: print(i, round(float(np.mean(acc)), 5), round(time.time() - t0), "s", flush=True)
         acc = []
 f.close()
-torch.save(dict(model=net.state_dict(), mean=bt.mean, std=bt.std, algo=a.algo, dataset=a.dataset, seed=a.seed, steps=steps, od=bt.od, ad=bt.ad), f"ckpt/{name}.pt")
+torch.save(dict(model=net.state_dict(), mean=bt.mean, std=bt.std, algo=a.algo, dataset=a.dataset, seed=a.seed, steps=steps, lr=lr, od=bt.od, ad=bt.ad), f"ckpt/{name}.pt")
 json.dump(dict(train_seconds=round(time.time() - t0, 1), steps=steps, batch=B, n_traj=len(trajs)), open(f"logs/{name}.time.json", "w"))
 print("done", name, round(time.time() - t0), "s")
