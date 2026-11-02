@@ -1,0 +1,146 @@
+{
+ "dataset": "hopper-medium-expert",
+ "n_traj": 2413,
+ "cache_order_check": {
+  "medium_part_return_mean": 2817.221435546875,
+  "expert_part_return_mean": 3857.5390625,
+  "medium_part_return_max": 3908.8544921875,
+  "expert_part_return_min": 395.63897705078125,
+  "medium_part_return_pctl": [
+   1595.6173095703125,
+   3566.982421875,
+   3678.4241943359375
+  ],
+  "expert_part_return_pctl": [
+   2290.1626953125,
+   4139.2919921875,
+   4238.29677734375
+  ],
+  "n_medium": 1326,
+  "n_expert": 1087,
+  "steps_medium": 998404,
+  "steps_expert": 1000164
+ },
+ "max_return": 4376.3271484375,
+ "eval_targets": [
+  1750.5,
+  2625.8,
+  3501.1,
+  4376.3,
+  5251.6
+ ],
+ "train_rtg_at_t0_pctl_1_25_50_75_99": [
+  1430.0,
+  2293.8,
+  3622.9,
+  4128.4,
+  4270.7
+ ],
+ "train_rtg_at_t100_pctl_1_25_50_75_99": [
+  1187.8,
+  2042.2,
+  3386.6,
+  3856.2,
+  4000.5
+ ],
+ "train_rtg_at_t300_pctl_1_25_50_75_99": [
+  373.3,
+  1253.4,
+  2615.4,
+  3030.4,
+  3158.4
+ ],
+ "train_rtg_at_t0_by_group": {
+  "medium": [
+   1595.6,
+   3567.0,
+   3678.4
+  ],
+  "expert": [
+   2290.2,
+   4139.3,
+   4238.3
+  ]
+ },
+ "dt": {
+  "ckpt/hopper-medium-expert_dtref_s0.pt": {
+   "mse_true_rtg": 0.05703146383166313,
+   "mse_shuffled_rtg_across_windows": 0.058215223252773285,
+   "mse_const_rtg_mean": 0.05867099389433861,
+   "mse_zero_rtg": 0.05855594947934151,
+   "mean_abs_action_change_const_rtg_1000_to_3500_all": 0.027005931362509727,
+   "action_abs_scale": 0.5278002023696899,
+   "mean_abs_action_change_rtg_shift_plus1000_all": 0.010422571562230587
+  },
+  "ckpt/hopper-medium-expert_dtref_s1.pt": {
+   "mse_true_rtg": 0.05739271268248558,
+   "mse_shuffled_rtg_across_windows": 0.05808086320757866,
+   "mse_const_rtg_mean": 0.058501601219177246,
+   "mse_zero_rtg": 0.05841735377907753,
+   "mean_abs_action_change_const_rtg_1000_to_3500_all": 0.02277461811900139,
+   "action_abs_scale": 0.5278002023696899,
+   "mean_abs_action_change_rtg_shift_plus1000_all": 0.00881951954215765
+  }
+ },
+ "bc_mse_same_windows": {
+  "ckpt/hopper-medium-expert_bc_s0.pt": 0.054777104407548904,
+  "ckpt/hopper-medium-expert_bc_s1.pt": 0.05474128946661949,
+  "ckpt/hopper-medium-expert_bc_s2.pt": 0.05422595515847206,
+  "ckpt/hopper-medium-expert_pbc_s0.pt": 0.35546982288360596,
+  "ckpt/hopper-medium-expert_pbc_s1.pt": 0.36431923508644104,
+  "ckpt/hopper-medium-expert_pbc_s2.pt": 0.3527860641479492
+ },
+ "mean_action_mse_of_zero_pred": 0.3864617943763733,
+ "by_group_full_windows": {
+  "medium": {
+   "ckpt/hopper-medium-expert_dtref_s0.pt": {
+    "mse_true": 0.053590115159749985,
+    "mse_shuffled": 0.054689712822437286,
+    "mse_rtg1000": 0.0542801097035408,
+    "mse_rtg3500": 0.05660228431224823,
+    "mean_abs_change_1000_vs_3500": 0.03200012445449829,
+    "mean_abs_change_true_vs_shuffled": 0.014219105243682861,
+    "true_rtg_mean_x1000": 1513.4749755859375
+   },
+   "ckpt/hopper-medium-expert_dtref_s1.pt": {
+    "mse_true": 0.053853269666433334,
+    "mse_shuffled": 0.05447862297296524,
+    "mse_rtg1000": 0.05417829379439354,
+    "mse_rtg3500": 0.05533488467335701,
+    "mean_abs_change_1000_vs_3500": 0.02240588888525963,
+    "mean_abs_change_true_vs_shuffled": 0.011203696951270103,
+    "true_rtg_mean_x1000": 1513.4749755859375
+   }
+  },
+  "medium_bc_mse": {
+   "ckpt/hopper-medium-expert_bc_s0.pt": 0.051745351403951645,
+   "ckpt/hopper-medium-expert_bc_s1.pt": 0.052059292793273926,
+   "ckpt/hopper-medium-expert_bc_s2.pt": 0.05174693092703819
+  },
+  "expert": {
+   "ckpt/hopper-medium-expert_dtref_s0.pt": {
+    "mse_true": 0.05715420842170715,
+    "mse_shuffled": 0.05795486271381378,
+    "mse_rtg1000": 0.05759841203689575,
+    "mse_rtg3500": 0.058475468307733536,
+    "mean_abs_change_1000_vs_3500": 0.023760123178362846,
+    "mean_abs_change_true_vs_shuffled": 0.012828374281525612,
+    "true_rtg_mean_x1000": 2053.926513671875
+   },
+   "ckpt/hopper-medium-expert_dtref_s1.pt": {
+    "mse_true": 0.057729315012693405,
+    "mse_shuffled": 0.058460406959056854,
+    "mse_rtg1000": 0.058057673275470734,
+    "mse_rtg3500": 0.05903244763612747,
+    "mean_abs_change_1000_vs_3500": 0.024737684056162834,
+    "mean_abs_change_true_vs_shuffled": 0.013799666427075863,
+    "true_rtg_mean_x1000": 2053.926513671875
+   }
+  },
+  "expert_bc_mse": {
+   "ckpt/hopper-medium-expert_bc_s0.pt": 0.0545530691742897,
+   "ckpt/hopper-medium-expert_bc_s1.pt": 0.05429879575967789,
+   "ckpt/hopper-medium-expert_bc_s2.pt": 0.05381202697753906
+  }
+ }
+}

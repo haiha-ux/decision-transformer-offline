@@ -1,10 +1,11 @@
 """Cheap checks on existing DT/BC checkpoints (no training): does the model use RTG, does eval-time RTG match training RTG,
-is the eval window construction identical to the training one.  python diagnose.py [dataset]  -> results/diagnostics_<dataset>.json"""
+is the eval window construction identical to the training one.  python diagnose.py [dataset [tag]]  -> results/diagnostics_<dataset>.json"""
 import sys, json, glob
 import numpy as np, torch
 from dtlib import *
 
 ds = sys.argv[1] if len(sys.argv) > 1 else "hopper-medium-expert"
+tag = sys.argv[2] if len(sys.argv) > 2 else ""   # "ref" -> checkpoints <ds>_dtref_s*.pt
 torch.set_num_threads(2); torch.manual_seed(0)
 trajs = load_trajs(ds)
 rets = np.array([t["rew"].sum() for t in trajs]); lens = np.array([len(t["rew"]) for t in trajs])
@@ -54,7 +55,7 @@ def mid_pred_diff(model, shift):
     d = ((p1 - p0).abs().mean(-1) * m).sum(1) / m.sum(1)
     return d
 res = {}
-for path in sorted(glob.glob(f"ckpt/{ds}_dt_s*.pt")):
+for path in sorted(glob.glob(f"ckpt/{ds}_dt{tag}_s*.pt")):
     c = torch.load(path, weights_only=False)
     assert np.allclose(c["mean"], bt.mean, atol=1e-4) and np.allclose(c["std"], bt.std, atol=1e-4), "ckpt normalisation differs from Batcher"
     net = DecisionTransformer(c["od"], c["ad"]); net.load_state_dict(c["model"]); net.eval()
@@ -95,7 +96,7 @@ grp = {}
 for name, idx in [("medium", np.where(~is_exp)[0]), ("expert", np.where(is_exp)[0])]:
     G_, S_, A_, T_, M_ = windows_from(idx)
     gg = {}
-    for path in sorted(glob.glob(f"ckpt/{ds}_dt_s*.pt")):
+    for path in sorted(glob.glob(f"ckpt/{ds}_dt{tag}_s*.pt")):
         c = torch.load(path, weights_only=False)
         net = DecisionTransformer(c["od"], c["ad"]); net.load_state_dict(c["model"]); net.eval()
         with torch.no_grad():
@@ -113,5 +114,5 @@ for name, idx in [("medium", np.where(~is_exp)[0]), ("expert", np.where(is_exp)[
         with torch.no_grad(): bg[path] = float(((net(S_) - A_) ** 2).mean())
     grp[name + "_bc_mse"] = bg
 out["by_group_full_windows"] = grp
-json.dump(out, open(f"results/diagnostics_{ds}.json", "w"), indent=1)
+json.dump(out, open(f"results/diagnostics_{ds}{tag}.json", "w"), indent=1)
 print(json.dumps(out, indent=1))
