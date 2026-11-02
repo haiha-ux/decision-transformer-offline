@@ -1,0 +1,38 @@
+[
+ {
+  "file": "hopper/target_40.mp4",
+  "frac": 0.4,
+  "target": 1563.5,
+  "ret": 1277.0,
+  "norm": 39.9,
+  "steps": 332,
+  "terminated": true
+ },
+ {
+  "file": "hopper/target_60.mp4",
+  "frac": 0.6,
+  "target": 2345.3,
+  "ret": 1294.9,
+  "norm": 40.4,
+  "steps": 337,
+  "terminated": true
+ },
+ {
+  "file": "hopper/target_100.mp4",
+  "frac": 1.0,
+  "target": 3908.9,
+  "ret": 1174.7,
+  "norm": 36.7,
+  "steps": 318,
+  "terminated": true
+ },
+ {
+  "file": "hopper/target_120.mp4",
+  "frac": 1.2,
+  "target": 4690.6,
+  "ret": 1229.1,
+  "norm": 38.4,
+  "steps": 328,
+  "terminated": true
+ }
+]

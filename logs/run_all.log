@@ -1,0 +1,252 @@
+halfcheetah-medium dt: 1000 trajectories, 1000000 steps
+5000 0.10562 45 s
+10000 0.09269 76 s
+15000 0.08764 112 s
+20000 0.08438 146 s
+25000 0.08221 177 s
+30000 0.08183 210 s
+35000 0.081 241 s
+40000 0.08091 279 s
+done halfcheetah-medium_dt_s0 279 s
+halfcheetah-medium bc: 1000 trajectories, 1000000 steps
+5000 0.07836 75 s
+10000 0.07181 150 s
+done halfcheetah-medium_bc_s0 150 s
+halfcheetah-medium pbc: 100 trajectories, 100000 steps
+5000 0.04218 75 s
+10000 0.03765 145 s
+done halfcheetah-medium_pbc_s0 145 s
+walker2d-medium dt: 1044 trajectories, 999613 steps
+5000 0.05177 34 s
+10000 0.04433 64 s
+15000 0.04095 98 s
+20000 0.03939 131 s
+25000 0.03802 164 s
+30000 0.03749 208 s
+35000 0.03711 241 s
+40000 0.03696 271 s
+done walker2d-medium_dt_s0 271 s
+walker2d-medium bc: 1044 trajectories, 999613 steps
+5000 0.03547 75 s
+10000 0.03225 150 s
+done walker2d-medium_bc_s0 150 s
+walker2d-medium pbc: 100 trajectories, 100000 steps
+5000 0.03193 79 s
+10000 0.0291 154 s
+done walker2d-medium_pbc_s0 154 s
+hopper-simple dt: 1952 trajectories, 999206 steps
+5000 0.07253 35 s
+10000 0.06238 71 s
+15000 0.05826 111 s
+20000 0.05609 149 s
+25000 0.05445 180 s
+30000 0.05351 218 s
+35000 0.05326 249 s
+40000 0.05313 281 s
+done hopper-simple_dt_s0 281 s
+hopper-simple bc: 1952 trajectories, 999206 steps
+5000 0.04763 70 s
+10000 0.0433 143 s
+done hopper-simple_bc_s0 143 s
+hopper-simple pbc: 100 trajectories, 99953 steps
+5000 0.04523 69 s
+10000 0.04199 136 s
+done hopper-simple_pbc_s0 136 s
+hopper-medium-expert dt: 2413 trajectories, 1998568 steps
+5000 0.09318 37 s
+10000 0.07786 86 s
+15000 0.07116 129 s
+20000 0.06732 169 s
+25000 0.06486 206 s
+30000 0.06418 248 s
+35000 0.06335 286 s
+40000 0.06308 318 s
+done hopper-medium-expert_dt_s0 318 s
+hopper-medium-expert bc: 2413 trajectories, 1998568 steps
+5000 0.06177 71 s
+10000 0.05408 143 s
+done hopper-medium-expert_bc_s0 143 s
+hopper-medium-expert pbc: 201 trajectories, 200505 steps
+5000 0.05284 68 s
+10000 0.04698 138 s
+done hopper-medium-expert_pbc_s0 138 s
+hopper-medium dt: 1327 trajectories, 999404 steps
+5000 0.08417 36 s
+10000 0.07041 78 s
+15000 0.06514 114 s
+20000 0.06187 151 s
+25000 0.05997 193 s
+30000 0.05914 232 s
+35000 0.05825 265 s
+40000 0.05775 314 s
+done hopper-medium_dt_s1 314 s
+hopper-medium bc: 1327 trajectories, 999404 steps
+5000 0.05468 66 s
+10000 0.0482 133 s
+done hopper-medium_bc_s1 133 s
+hopper-medium pbc: 101 trajectories, 100886 steps
+5000 0.05308 72 s
+10000 0.04604 140 s
+done hopper-medium_pbc_s1 140 s
+halfcheetah-medium dt: 1000 trajectories, 1000000 steps
+5000 0.10505 36 s
+10000 0.09268 89 s
+15000 0.08784 123 s
+20000 0.08392 152 s
+25000 0.08333 193 s
+30000 0.08178 228 s
+35000 0.08063 265 s
+40000 0.08023 305 s
+done halfcheetah-medium_dt_s1 305 s
+halfcheetah-medium bc: 1000 trajectories, 1000000 steps
+5000 0.0789 76 s
+10000 0.07185 147 s
+done halfcheetah-medium_bc_s1 147 s
+halfcheetah-medium pbc: 100 trajectories, 100000 steps
+5000 0.0422 68 s
+10000 0.03773 141 s
+done halfcheetah-medium_pbc_s1 141 s
+walker2d-medium dt: 1044 trajectories, 999613 steps
+5000 0.05156 48 s
+10000 0.04369 86 s
+15000 0.04068 129 s
+20000 0.03922 160 s
+25000 0.03795 194 s
+30000 0.03729 236 s
+35000 0.03705 278 s
+40000 0.03686 317 s
+done walker2d-medium_dt_s1 317 s
+walker2d-medium bc: 1044 trajectories, 999613 steps
+5000 0.03546 75 s
+10000 0.03255 142 s
+done walker2d-medium_bc_s1 142 s
+walker2d-medium pbc: 100 trajectories, 100000 steps
+5000 0.03168 75 s
+10000 0.02883 148 s
+done walker2d-medium_pbc_s1 148 s
+hopper-simple dt: 1952 trajectories, 999206 steps
+5000 0.07205 60 s
+10000 0.06231 102 s
+15000 0.05835 140 s
+20000 0.05572 175 s
+25000 0.0543 206 s
+30000 0.0535 238 s
+35000 0.05292 272 s
+40000 0.05259 305 s
+done hopper-simple_dt_s1 305 s
+hopper-simple bc: 1952 trajectories, 999206 steps
+5000 0.04789 69 s
+10000 0.0435 136 s
+done hopper-simple_bc_s1 136 s
+hopper-simple pbc: 100 trajectories, 99953 steps
+5000 0.04535 69 s
+10000 0.04196 138 s
+done hopper-simple_pbc_s1 138 s
+hopper-medium-expert dt: 2413 trajectories, 1998568 steps
+5000 0.09282 39 s
+10000 0.07748 90 s
+15000 0.07104 131 s
+20000 0.06763 167 s
+25000 0.06548 212 s
+30000 0.06386 252 s
+35000 0.06277 281 s
+40000 0.06311 328 s
+done hopper-medium-expert_dt_s1 328 s
+hopper-medium-expert bc: 2413 trajectories, 1998568 steps
+5000 0.06212 73 s
+10000 0.05387 143 s
+done hopper-medium-expert_bc_s1 143 s
+hopper-medium-expert pbc: 201 trajectories, 200505 steps
+5000 0.05284 71 s
+10000 0.04689 145 s
+done hopper-medium-expert_pbc_s1 145 s
+hopper-medium dt: 1327 trajectories, 999404 steps
+5000 0.08397 31 s
+10000 0.07102 79 s
+15000 0.06489 117 s
+20000 0.06193 162 s
+25000 0.06005 215 s
+30000 0.05888 254 s
+35000 0.05808 290 s
+40000 0.05818 325 s
+done hopper-medium_dt_s2 325 s
+hopper-medium bc: 1327 trajectories, 999404 steps
+5000 0.05505 69 s
+10000 0.04878 143 s
+done hopper-medium_bc_s2 143 s
+hopper-medium pbc: 101 trajectories, 100886 steps
+5000 0.05238 78 s
+10000 0.04639 148 s
+done hopper-medium_pbc_s2 148 s
+halfcheetah-medium dt: 1000 trajectories, 1000000 steps
+5000 0.10656 44 s
+10000 0.09303 92 s
+15000 0.08806 134 s
+20000 0.08489 171 s
+25000 0.08244 199 s
+30000 0.08138 240 s
+35000 0.08007 275 s
+40000 0.08038 308 s
+done halfcheetah-medium_dt_s2 308 s
+halfcheetah-medium bc: 1000 trajectories, 1000000 steps
+5000 0.0788 75 s
+10000 0.07219 149 s
+done halfcheetah-medium_bc_s2 149 s
+halfcheetah-medium pbc: 100 trajectories, 100000 steps
+5000 0.04216 74 s
+10000 0.03756 141 s
+done halfcheetah-medium_pbc_s2 141 s
+walker2d-medium dt: 1044 trajectories, 999613 steps
+5000 0.05177 42 s
+10000 0.04386 113 s
+15000 0.04086 169 s
+20000 0.03918 215 s
+25000 0.03806 285 s
+30000 0.0375 357 s
+35000 0.03715 425 s
+40000 0.03691 496 s
+done walker2d-medium_dt_s2 496 s
+walker2d-medium bc: 1044 trajectories, 999613 steps
+5000 0.03552 52 s
+10000 0.03242 101 s
+done walker2d-medium_bc_s2 101 s
+walker2d-medium pbc: 100 trajectories, 100000 steps
+5000 0.03182 51 s
+10000 0.0292 103 s
+done walker2d-medium_pbc_s2 103 s
+hopper-simple dt: 1952 trajectories, 999206 steps
+5000 0.07265 73 s
+10000 0.06263 127 s
+15000 0.05838 184 s
+20000 0.05607 233 s
+25000 0.0544 277 s
+30000 0.05365 327 s
+35000 0.0531 364 s
+40000 0.05296 410 s
+done hopper-simple_dt_s2 410 s
+hopper-simple bc: 1952 trajectories, 999206 steps
+5000 0.04761 25 s
+10000 0.04352 48 s
+done hopper-simple_bc_s2 48 s
+hopper-simple pbc: 100 trajectories, 99953 steps
+5000 0.04521 58 s
+10000 0.04179 126 s
+done hopper-simple_pbc_s2 126 s
+hopper-medium-expert dt: 2413 trajectories, 1998568 steps
+5000 0.09232 37 s
+10000 0.07737 82 s
+15000 0.07093 125 s
+20000 0.06757 172 s
+25000 0.06545 215 s
+30000 0.06372 248 s
+35000 0.06324 281 s
+40000 0.0632 312 s
+done hopper-medium-expert_dt_s2 312 s
+hopper-medium-expert bc: 2413 trajectories, 1998568 steps
+5000 0.06144 73 s
+10000 0.05368 146 s
+done hopper-medium-expert_bc_s2 146 s
+hopper-medium-expert pbc: 201 trajectories, 200505 steps
+5000 0.05244 73 s
+10000 0.04663 144 s
+done hopper-medium-expert_pbc_s2 144 s

@@ -1,0 +1,8 @@
+.venv/
+data/
+ckpt/
+__pycache__/
+*.pyc
+MUJOCO_LOG.TXT
+.pytest_cache/
+ckpt_small/

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Decision Transformer on Hopper: return-conditioned rollouts</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body{font:15px/1.5 system-ui,sans-serif;max-width:720px;margin:2rem auto;padding:0 1rem;color:#222}
+video{width:100%;background:#eee;border-radius:4px}
+input[type=range]{width:100%} table{border-collapse:collapse;width:100%;margin-top:.5rem}
+td,th{border-bottom:1px solid #ddd;padding:.25rem .5rem;text-align:right} th:first-child,td:first-child{text-align:left}
+tr.sel{background:#eef4ff} small{color:#555}
+</style></head><body>
+<h1>Decision Transformer, Hopper-v5</h1>
+<p>Each video is one deterministic episode of the same trained Decision Transformer (seed 0, trained on Minari <code>mujoco/hopper/medium-v0</code>),
+differing only in the return-to-go it is told to achieve. The slider picks the target. Videos are pre-rendered; nothing runs in your browser.</p>
+<p><b>Target return:</b> <span id="tgt"></span> (<span id="frac"></span> of the best episode in the dataset)</p>
+<input id="sl" type="range" min="0" max="3" step="1" value="2">
+<video id="v" controls loop muted autoplay playsinline></video>
+<p id="res"></p>
+<table id="tab"><thead><tr><th>target</th><th>achieved return</th><th>normalized score</th><th>steps</th><th>ended</th></tr></thead><tbody></tbody></table>
+<p><small>One episode per target, fixed env seed 12345, not selected. A single episode is an anecdote; the repository README has the 3-seed x 10-episode numbers.
+Normalized score = 100 (return - random) / (expert - random) with the D4RL Hopper reference returns (-20.27, 3234.3); the Minari medium data already scores around 87 by this scale,
+so values above 100 are possible. The model is also exported to <code>hopper_dt.onnx</code> (fixed context of 20 steps; PyTorch/onnxruntime outputs agree to the tolerance stated in the README).</small></p>
+<script>
+const M = [{"file": "hopper/target_40.mp4", "frac": 0.4, "target": 1563.5, "ret": 1277.0, "norm": 39.9, "steps": 332, "terminated": true}, {"file": "hopper/target_60.mp4", "frac": 0.6, "target": 2345.3, "ret": 1294.9, "norm": 40.4, "steps": 337, "terminated": true}, {"file": "hopper/target_100.mp4", "frac": 1.0, "target": 3908.9, "ret": 1174.7, "norm": 36.7, "steps": 318, "terminated": true}, {"file": "hopper/target_120.mp4", "frac": 1.2, "target": 4690.6, "ret": 1229.1, "norm": 38.4, "steps": 328, "terminated": true}];
+const sl=document.getElementById('sl'), v=document.getElementById('v'), tb=document.querySelector('#tab tbody');
+M.forEach((m,i)=>{const r=tb.insertRow();r.innerHTML=`<td>${m.target.toFixed(0)}</td><td>${m.ret.toFixed(0)}</td><td>${m.norm.toFixed(1)}</td><td>${m.steps}</td><td>${m.terminated?'fell (terminated)':'time limit'}</td>`;r.onclick=()=>{sl.value=i;show()}});
+sl.max=M.length-1;
+function show(){const i=+sl.value,m=M[i];v.src=m.file;v.play().catch(()=>{});
+ document.getElementById('tgt').textContent=m.target.toFixed(0);document.getElementById('frac').textContent='x'+m.frac;
+ document.getElementById('res').innerHTML=`Achieved return <b>${m.ret.toFixed(0)}</b> (normalized ${m.norm.toFixed(1)}) in ${m.steps} steps, ${m.terminated?'episode ended by a fall':'ran to the 1000-step limit'}.`;
+ [...tb.rows].forEach((r,j)=>r.classList.toggle('sel',j==i));}
+sl.oninput=show;show();
+</script></body></html>
