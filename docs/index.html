@@ -10,12 +10,46 @@ tr.sel{background:#eef4ff} small{color:#555}
 </style></head><body>
 <h1>Decision Transformer, Hopper-v5</h1>
 <p>Each video is one deterministic episode of the same trained Decision Transformer (seed 0, trained on Minari <code>mujoco/hopper/medium-v0</code>),
-differing only in the return-to-go it is told to achieve. The slider picks the target. Videos are pre-rendered; nothing runs in your browser.</p>
+differing only in the return-to-go it is told to achieve. The slider picks the target. These videos are pre-rendered; the live panel further down runs the actual model in your browser.</p>
 <p><b>Target return:</b> <span id="tgt"></span> (<span id="frac"></span> of the best episode in the dataset)</p>
 <input id="sl" type="range" min="0" max="3" step="1" value="2">
 <video id="v" controls loop muted autoplay playsinline></video>
 <p id="res"></p>
 <table id="tab"><thead><tr><th>target</th><th>achieved return</th><th>normalized score</th><th>steps</th><th>ended</th></tr></thead><tbody></tbody></table>
+<h2>Live model probe (runs in your browser)</h2>
+<p>This is <b>not</b> a simulation: there is no physics in the page. It feeds the first 100 observations of one recorded episode (target = 1.0 x best dataset return, the same policy and env seed as the videos)
+to <code>hopper_dt.onnx</code> through onnxruntime-web, with the return-to-go you choose, and shows the actions the model would output at each step.
+Dashed grey = target 3909 (the recorded actions); solid = your target. If the lines overlap, the model ignores the target there.</p>
+<p><b>Target return:</b> <span id="ptgt"></span> &nbsp; mean |action difference| vs target 3909: <b id="pdiff"></b> <small id="pstat">(loading model...)</small></p>
+<input id="psl" type="range" min="0" max="5000" step="50" value="1500" disabled>
+<canvas id="cv" width="680" height="220" style="width:100%;border:1px solid #ddd;border-radius:4px"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/ort.min.js"></script>
+<script src="probe.js"></script>
+<script>
+(async()=>{
+ const st=document.getElementById('pstat'), psl=document.getElementById('psl'), cv=document.getElementById('cv'), cx=cv.getContext('2d');
+ try{
+  if(typeof ort==='undefined') throw new Error('onnxruntime-web did not load (CDN blocked or offline)');
+  ort.env.wasm.wasmPaths='https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/';
+  const [sess,P]=await Promise.all([ort.InferenceSession.create('hopper_dt.onnx'),fetch('probe.json').then(r=>r.json())]);
+  const ref=await runProbe(ort,sess,P,P.target), cols=['#d33','#2a2','#36c'];
+  let busy=false, again=false;
+  async function upd(){
+   if(busy){again=true;return} busy=true;
+   do{again=false; const tg=+psl.value, y=await runProbe(ort,sess,P,tg);
+    document.getElementById('ptgt').textContent=tg;
+    let d=0,n=0; y.forEach((a,t)=>a.forEach((v,k)=>{d+=Math.abs(v-ref[t][k]);n++}));
+    document.getElementById('pdiff').textContent=(d/n).toFixed(4);
+    cx.clearRect(0,0,cv.width,cv.height); const T=y.length;
+    [ref,y].forEach((s,q)=>{for(let k=0;k<3;k++){cx.beginPath();cx.strokeStyle=q?cols[k]:'#aaa';cx.lineWidth=q?1.8:1.2;cx.setLineDash(q?[]:[4,3]);
+     s.forEach((a,t)=>{const X=t/(T-1)*(cv.width-10)+5,Y=cv.height/2-a[k]*(cv.height/2-8);t?cx.lineTo(X,Y):cx.moveTo(X,Y)});cx.stroke()}});
+    cx.setLineDash([]);cx.fillStyle='#555';cx.font='11px sans-serif';cx.fillText('3 action dimensions (thigh, leg, foot torque) in [-1,1] vs step 0..'+(T-1),6,12);
+   }while(again); busy=false;
+  }
+  psl.disabled=false; psl.oninput=upd; st.textContent='(model loaded)'; upd();
+ }catch(e){st.textContent='(live probe unavailable: '+e.message+')'}
+})();
+</script>
 <p><small>One episode per target, fixed env seed 12345, not selected. A single episode is an anecdote; the repository README has the 3-seed x 10-episode numbers.
 Normalized score = 100 (return - random) / (expert - random) with the D4RL Hopper reference returns (-20.27, 3234.3); the Minari medium data already scores around 87 by this scale,
 so values above 100 are possible. The model is also exported to <code>hopper_dt.onnx</code> (fixed context of 20 steps; PyTorch/onnxruntime outputs agree to the tolerance stated in the README).</small></p>
